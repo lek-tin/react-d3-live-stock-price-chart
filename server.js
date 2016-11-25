@@ -1,7 +1,7 @@
 'use strict';
 
 // Configuration
-const UPDATE_INTERVAL = 5000;
+const UPDATE_INTERVAL = 500;
 const PRETTY_JSON = true;
 const PORT = process.env.PORT || 4000;
 
