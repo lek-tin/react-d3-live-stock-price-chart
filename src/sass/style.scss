@@ -1,0 +1,59 @@
+#app {
+    margin: 0 0 30px 0;
+}
+
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+    position: relative;
+    left: 0;
+    opacity: 1;
+}
+
+.legend {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	margin-top: 5px;
+	&--1 {
+		background-color: #288FB4;
+	}
+	&--2 {
+		background-color: #F8DA5B;
+	}
+	&--3 {
+		background-color: #EFDDB2;
+	}
+	&--4 {
+		background-color: #FA360A;
+	}
+	&--5 {
+		background-color: #6BC369;
+	}
+	&--6 {
+		background-color: #1D556F;
+	}
+	&--7 {
+		background-color: #C3FF00;
+	}
+	&--8 {
+		background-color: #BF383F;
+	}
+	&--9 {
+		background-color: #00FFCE;
+	}
+	&--10 {
+		background-color: #FF0055;
+	}
+}
+
+.highlight {
+	background-color: pink;
+}
+
+.increase {
+	color: green;
+}
+
+.drop {
+	color: red;
+}
+
