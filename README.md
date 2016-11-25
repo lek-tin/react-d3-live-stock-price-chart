@@ -2,9 +2,9 @@
 
 ## Getting started
 1. Go to the root directory, run `npm install`;    
-3. When the installation is complete, run `npm start` to start the node server in the backgound
+3. When the installation is complete, run `npm start` to start the node server in the backgound;
 4. Then open another new terminal window, run `webpack --watch` to transpile React/ES6 JavaScript to `bundle.js`;  
-5. Now you can use the application on [localhost:4000](http://localhost:4000/)
+5. Now you can use the application on [localhost:4000](http://localhost:4000/).
 
 ## Notes
 I tried to use Google Finance api to update the chart, however the data it provides `bid`, `bid size`, `ask`, `ask size` and such data. And also it keeps denying my visit after using a single IP for a while, then I went to do some research only to find that [Google Finance API](https://developers.google.com/finance/) has deprecated. In the end I had a build the backend API to feed data to frontend which  added some extra pressure on the deadline. In any case, below are some advantages/drawbacks of this basic working model,
