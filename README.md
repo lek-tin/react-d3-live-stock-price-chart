@@ -3,7 +3,7 @@
 ## Getting started
 1. Go to the root directory, run `npm install`;    
 3. When the installation is complete, run `npm start` to start the node server in the backgound
-4. Then open another new terminal window, run `webpack --watch` to transpile React/ES^ JavaScript to `bundle.js`;  
+4. Then open another new terminal window, run `webpack --watch` to transpile React/ES6 JavaScript to `bundle.js`;  
 5. Now you can use the application on [localhost:4000](http://localhost:4000/)
 
 ## Notes
