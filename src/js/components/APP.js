@@ -46,6 +46,7 @@ const APP = React.createClass({
                         'QQQ',
                         'FTR'
                         ],
+            unloadArray: [],
             checkArray: [true, true, true, true, true, false, false, false, false, false],
             legendColors: [ "#288FB4",
                             "#FA360A",
@@ -75,12 +76,14 @@ const APP = React.createClass({
 
     componentDidMount() {
         const checkArray = this.state.checkArray;
-        this._updateChart(checkArray);
+        const unloadArray = this.state.unloadArray;
+        this._updateChart(checkArray, unloadArray);
     },
 
     componentDidUpdate: function(prevProps, prevState) {
         const checkArray = this.state.checkArray;
-        this._updateChart(checkArray);
+        const unloadArray = this.state.unloadArray;
+        this._updateChart(checkArray, unloadArray);
     },
 
     _updateQuotes(obj) {
@@ -103,7 +106,8 @@ const APP = React.createClass({
         this.setState({ valueArray: valueArray, dataArray: dataArray });
     },
 
-    _updateChart(checkArray) {
+    _updateChart(checkArray, unloadArray) {
+        console.log('unloadArray:', unloadArray);
         const self = this;
         let dataToFeed = [];
         const timeseries = _.concat('x', self.state.timeseries);
@@ -124,9 +128,7 @@ const APP = React.createClass({
                     x: 'x',
                     xFormat: '%H:%M:%S', // 'xFormat' can be used as custom format of 'x'
                     columns: dataToFeed,
-                    colors: {
-                        pattern: self.state.colorPairs
-                    }
+                    colors: self.state.colorPairs
                 },
                 axis: {
                     x: {
@@ -139,8 +141,8 @@ const APP = React.createClass({
             });
         } else {
             self.chart.load({
-                unload: true,
-                columns: dataToFeed
+                columns: dataToFeed,
+                unload: unloadArray
             });
         }
         
@@ -149,7 +151,12 @@ const APP = React.createClass({
     _selectQuote(key) {
         const newKey = parseInt(key, 10);
         let checkArray = this.state.checkArray;
+        let unloadArray = [];
+        if (checkArray[newKey]) {
+            unloadArray = [this.state.quoteList[newKey]];
+        }
         checkArray[newKey] = !checkArray[newKey];
+        this.setState({ checkArray: checkArray, unloadArray: unloadArray });
     },
 
     _connect() {
@@ -164,7 +171,7 @@ const APP = React.createClass({
     _eachRecord(val, i, self) {
         return (
             <SingleRecord selectQuote={self._selectQuote} 
-                          key={i} {...self.state.dataArray[i]}
+                          key={i} index={i} {...self.state.dataArray[i]}
                           legendColor={self.state.legendColors[i]} 
                           checkStatus={self.state.checkArray[i]} />
         )
@@ -189,7 +196,7 @@ const APP = React.createClass({
                         <th label="ask size">Ask Size</th>
 					</tr>
 				</thead>
-				<tbody>
+                <tbody>
                     {
                         this.state.quoteList.map(function(val, i) {
                             return self._eachRecord(val, i, self);

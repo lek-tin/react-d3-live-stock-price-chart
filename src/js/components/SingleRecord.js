@@ -1,17 +1,32 @@
 import React from "react";
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import ReactDOM from "react-dom";
 import _ from "lodash";
 
 const SingleRecord = React.createClass({
 
     shouldComponentUpdate(nextProps, nextState) {
-        this.toUpdate = false;
-        if (this.props.price === nextProps.price) {
-            return false;
-        } else {
-            this.toUpdate = true;
-            return true;
-        }
+        if (this.props.price === nextProps.price) return false;
+        return true;
+    },
+
+    componentDidMount: function(prevProps, prevState) {
+        const table_row = ReactDOM.findDOMNode(this.refs.table_row);
+        table_row.className = 'flash';
+        console.log('component did mount(FIRST) -> class name: ', table_row.className);
+        setTimeout(function() {
+            table_row.className = '';
+            console.log('component did mount (SECOND)-> class name: ', table_row.className);
+        }, 300);
+    },
+
+    componentDidUpdate: function(prevProps, prevState) {
+        const table_row = ReactDOM.findDOMNode(this.refs.table_row);
+        table_row.className = 'flash';
+        console.log('component did mount(FIRST) -> class name: ', table_row.className);
+        setTimeout(function() {
+            table_row.className = '';
+            console.log('component did mount (SECOND)-> class name: ', table_row.className);
+        }, 300);
     },
 
     _handleCheck() {
@@ -24,11 +39,7 @@ const SingleRecord = React.createClass({
         };
 
         return(
-            <ReactCSSTransitionGroup
-                transitionName="flash"
-                transitionEnterTimeout={300}
-                transitionLeaveTimeout={300}
-                component='tr' key={this.props.index}>
+            <tr ref='table_row' class='flash' key={this.props.index}>
                 <td ref="show">
                     <input type="checkbox" checked={this.props.checkStatus} onChange={this._handleCheck} />
                 </td>
@@ -44,10 +55,13 @@ const SingleRecord = React.createClass({
                 <td ref="bid">{this.props.bid}</td>
                 <td ref="ask">{this.props.ask}</td>
                 <td ref="askSize">{this.props.ask_size}</td>
-            </ReactCSSTransitionGroup>
+            </tr>
         )
     }
 
 });
 
 export default SingleRecord;
+
+
+
