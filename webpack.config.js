@@ -7,6 +7,11 @@ module.exports = {
         path: './public',
         filename: '/js/bundle.js'
     },
+    node: {
+        fs: 'empty',
+        child_process : 'empty',
+        net : 'empty',
+    },
     module: {
         loaders: [{
             test: /\.js?$/,
